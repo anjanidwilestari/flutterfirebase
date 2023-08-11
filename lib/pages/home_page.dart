@@ -1,5 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter/services.dart';
+import 'package:flutterfirebase/pages/crud_page.dart';
+import 'package:flutterfirebase/pages/scan_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,7 +21,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Home Page'),
+        title: Text(
+          "Home Page",
+        ),
         actions: [
           IconButton(
             onPressed: () async {
@@ -26,15 +33,41 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        overlayOpacity: 0.1,
+        overlayColor: Colors.black,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.add),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CrudPage()),
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.qr_code_scanner_rounded),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ScanPage()),
+              );
+            },
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Row(
         children: [
           Center(
-            child: Container(
+            child: SizedBox(
               width: 410,
               child: Text(
                 user!.email.toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   color: Colors.grey,
                 ),
