@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:flutter/services.dart';
 import 'package:flutterfirebase/pages/crud_page.dart';
 import 'package:flutterfirebase/pages/scan_page.dart';
 
@@ -21,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Home Page",
         ),
         actions: [
@@ -39,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         overlayColor: Colors.black,
         children: [
           SpeedDialChild(
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             onTap: () {
               Navigator.push(
                 context,
@@ -48,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.qr_code_scanner_rounded),
+            child: const Icon(Icons.qr_code_scanner_rounded),
             onTap: () {
               Navigator.push(
                 context,

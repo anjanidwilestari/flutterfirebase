@@ -12,12 +12,6 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
-  // Mendefinisikan variabel
-  final CollectionReference _products =
-      FirebaseFirestore.instance.collection('products');
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +36,10 @@ class _ScanPageState extends State<ScanPage> {
                   children: <Widget>[
                     ElevatedButton(
                         onPressed: () => scanQR(),
-                        child: Text('Start QR scan')),
+                        child: const Text('Start QR scan')),
                     Text(
                       '\nScan result:\n\n $_scanBarcode\n',
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                       textAlign: TextAlign.center,
                     )
                   ]));
@@ -53,21 +47,19 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   // Komponen Utama Fungsi Scan QR
-
   String _scanBarcode = 'Unknown';
-
   @override
   void initState() {
     super.initState();
   }
 
+  // Komponen Utama Fungsi Scan QR
   Future<void> scanQR() async {
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
